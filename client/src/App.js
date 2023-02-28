@@ -10,7 +10,7 @@ import Home from './components/Home';
 function App() {
   return (<BrowserRouter>
     <Routes>
-      <Route path="/client" element={<Home/>} />
+      <Route path="./" element={<Home/>} />
     
       <Route path=""/>
     </Routes>

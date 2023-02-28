@@ -7,6 +7,7 @@ const Home=()=>{
         
         
          <h1>This is home  laxmikant is here page</h1>
+         <h2>changes from seea's side</h2>
 
         </div>   
     )

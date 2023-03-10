@@ -8,6 +8,7 @@ export const userSignup= async(req, res)=>{
         //     return res.status(401).json({message:'Username already exists'});
         // }
         const user=req.body;
+        console.log(user);
         const newUser= new User(user);
         await newUser.save();
         res.status(200).json({message:user});

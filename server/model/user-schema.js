@@ -20,7 +20,7 @@ const userSchema= new mongoose.Schema({
         type:String,
         required:true,
         trim:true,
-        unique:true,
+    
         lowercase:true
     },
     password:{
@@ -28,7 +28,7 @@ const userSchema= new mongoose.Schema({
         required:true
     },
     phone:{
-          type:Number,
+          type:String,
           required:true
     }
 })

@@ -7,6 +7,7 @@ import Home from './components/Pages/Home';
 import Header from './components/Header';
 import About from './components/About';
 import Services from './components/Services';
+import Register from './components/Pages/register/Register';
 function App() {
   return (
     <>
@@ -17,6 +18,7 @@ function App() {
       <Route path="/" element={<Home/>} />
       <Route path="/about" element={<About/>}/>
       <Route path="/services" element={<Services/>}/>
+      <Route path="/register" element={<Register/>}/>
     </Routes>
   </BrowserRouter>
   </>

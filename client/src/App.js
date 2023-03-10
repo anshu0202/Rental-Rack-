@@ -3,18 +3,23 @@ import './App.css';
 import {
   BrowserRouter, Routes, Route
 } from "react-router-dom";
-
-import Home from './components/Home';
-
-
+import Home from './components/Pages/Home';
+import Header from './components/Header';
+import About from './components/About';
+import Services from './components/Services';
 function App() {
-  return (<BrowserRouter>
+  return (
+    <>
+  
+  <BrowserRouter>
+  <Header/>
     <Routes>
-      <Route path="" element={<Home/>} />
-    
-      <Route path=""/>
+      <Route path="/" element={<Home/>} />
+      <Route path="/about" element={<About/>}/>
+      <Route path="/services" element={<Services/>}/>
     </Routes>
   </BrowserRouter>
+  </>
     
   );
 }
@@ -22,4 +27,3 @@ function App() {
 export default App;
 
 
-// "homepage": "https://anuragarya8.github.io/client",

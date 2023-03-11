@@ -21,8 +21,8 @@ const signupInitialValues={
 
 const Register=()=>{
 
-       const ImgUrl="https://img.freepik.com/free-vector/data-analysis-business-concept-doodle-analysts-office-people-work-together-research-statistics-charts-graphs-diagrams-sales-management-operational-reports-line-art-vector-illustration_107791-9818.jpg?w=2000"
-
+//        const ImgUrl="https://img.freepik.com/free-vector/data-analysis-business-concept-doodle-analysts-office-people-work-together-research-statistics-charts-graphs-diagrams-sales-management-operational-reports-line-art-vector-illustration_107791-9818.jpg?w=2000"
+         const ImgUrl="https://cdn2.hubspot.net/hubfs/5242301/Blog%20Images/Happy%20Employee%20Dovetail%20Employee%20Portal.jpg"        
         const [signup,setSignup]=useState(signupInitialValues);
 
         const userSignup= async()=>{
@@ -41,7 +41,7 @@ const Register=()=>{
 
     return (
       
-                <div className='container'>
+                <div className='Container'>
                     
                     <div className='leftSide col'>
                             <img src={ImgUrl} alt="" />

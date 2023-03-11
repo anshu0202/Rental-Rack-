@@ -2,7 +2,7 @@ import react from 'react';
 import img1 from '../../Images/img1.jpg';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-
+import Footer from '../Footer';
 import Header from '../Header';
 
 function Home(){
@@ -17,6 +17,7 @@ function Home(){
          <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi ratione repudiandae ex! Voluptatibus nobis, qui molestias excepturi perspiciatis consequatur, quasi animi nisi reprehenderit modi optio sed, consectetur quod error dolore. Architecto ex cupiditate quae officiis debitis dicta exercitationem. Ipsum asperiores temporibus fugit alias hic delectus amet beatae dignissimos praesentium necessitatibus!</h1>
           
         </div> 
+        <Footer/>
         </>  
     )
 }

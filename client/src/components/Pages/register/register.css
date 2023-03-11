@@ -59,7 +59,8 @@
 }
 .signupuserInput input{
     width: 100%;
-    font-size: 20px;
+    font-size: 15px;
+    font-weight: 600;
     padding: 3px;
     padding-left: 10px;
     border-radius: 10px;
@@ -94,3 +95,23 @@
     cursor: pointer;
     font-weight: 700;
 }
+.forgetPassword{
+    color: green;
+    cursor: pointer;
+}
+
+
+.OtpForm{
+    /* border: 2px solid red; */
+    height: 50vh;
+    width: 80vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+     margin-top: 5rem;
+}
+
+/* .optform{
+    width: 80px;
+    border: 2px solid red;
+} */

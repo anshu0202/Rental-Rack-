@@ -22,7 +22,8 @@ const signupInitialValues={
 const Register=()=>{
 
 //        const ImgUrl="https://img.freepik.com/free-vector/data-analysis-business-concept-doodle-analysts-office-people-work-together-research-statistics-charts-graphs-diagrams-sales-management-operational-reports-line-art-vector-illustration_107791-9818.jpg?w=2000"
-         const ImgUrl="https://cdn2.hubspot.net/hubfs/5242301/Blog%20Images/Happy%20Employee%20Dovetail%20Employee%20Portal.jpg"        
+        //  const ImgUrl="https://cdn2.hubspot.net/hubfs/5242301/Blog%20Images/Happy%20Employee%20Dovetail%20Employee%20Portal.jpg" 
+        const ImgUrl="https://img.freepik.com/free-vector/telework-concept-illustration_114360-5389.jpg?w=2000"       
         const [signup,setSignup]=useState(signupInitialValues);
 
         const userSignup= async()=>{
@@ -43,40 +44,63 @@ const Register=()=>{
       
                 <div className='Container'>
                     
-                    <div className='leftSide col'>
+                    <div className='leftSide '>
                             <img src={ImgUrl} alt="" />
+                            <div className="transparent-layer"></div>
                     </div>
-                       <div className='rightSide col'>
+                       <div className='rightSide '>
+
+
+                        <form className='signupForm'>
+                                
+
+
+
+
+
+
+             
+
+
+
+
+
+
+
+
+
                           <h2>REGISTRATION FORM</h2>
 
-                            <div className='userInput'>
+                            <div className='signupuserInput'>
                                     <input type="text" onChange={(e)=>onInputChange(e)}  placeholder='First Name' name="firstname" />
-                                    <input type="text" onChange={(e)=>onInputChange(e)}  placeholder='Last Name' name="lastname" />
+                                   
                             </div>
 
-                            <div className='userInput'>
+                            <div className='signupuserInput'>           
+                            <input type="text" onChange={(e)=>onInputChange(e)}  placeholder='Last Name' name="lastname" />
+                            </div>
+                            <div className='signupuserInput'>
                                     <input type="text"  onChange={(e)=>onInputChange(e)} placeholder='Username' name="username" />
                                     
                             </div>
-                            <div className='userInput'>
+                            <div className='signupuserInput'>
                                     <input type="email" onChange={(e)=>onInputChange(e)}  placeholder='Email Address' name="email" />
                                     
                             </div>
 
-                            <div className='userInput'>
+                            <div className='signupuserInput'>
                                     <input type="text" onChange={(e)=>onInputChange(e)}  placeholder='Phone Number' name="phone" />                 
                             </div>
-                            <div className='userInput'>
+                            <div className='signupuserInput'>
                                     <input type="password" onChange={(e)=>onInputChange(e)}  placeholder='Password' name="password" />                                    
                             </div>
-                            <div className='userInput'>
+                            <div className='signupuserInput'>
                                     <input type="password"  placeholder='Confirm Password' />                                    
                             </div>
 
 
-                            <button  onClick={()=>userSignup()}  >Register</button>
-
-
+                            <button  className='signupBtn' onClick={()=>userSignup()}  >Register</button>
+</form>
                         </div> 
 
                 </div>    

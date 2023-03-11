@@ -83,4 +83,14 @@
     border: 2px solid green;
     /* align-items: center; */
 }
-
+.LoginPage{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 5px;
+    color: green;
+    font-weight: 500;
+}
+.login{
+    cursor: pointer;
+    font-weight: 700;
+}

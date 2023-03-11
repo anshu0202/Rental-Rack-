@@ -1,12 +1,11 @@
 
 import {Dialog} from '@mui/material'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {authenticateSignup} from '../../../service/api'
 
 
 import './register.css'
-
-
 
 
 const signupInitialValues={
@@ -21,10 +20,15 @@ const signupInitialValues={
 
 const Register=()=>{
 
+         const navigate=useNavigate();
+
 //        const ImgUrl="https://img.freepik.com/free-vector/data-analysis-business-concept-doodle-analysts-office-people-work-together-research-statistics-charts-graphs-diagrams-sales-management-operational-reports-line-art-vector-illustration_107791-9818.jpg?w=2000"
         //  const ImgUrl="https://cdn2.hubspot.net/hubfs/5242301/Blog%20Images/Happy%20Employee%20Dovetail%20Employee%20Portal.jpg" 
         const ImgUrl="https://img.freepik.com/free-vector/telework-concept-illustration_114360-5389.jpg?w=2000"       
         const [signup,setSignup]=useState(signupInitialValues);
+
+        const [registerPage,setRegisterpage]=useState(true);
+       
 
         const userSignup= async(e)=>{
                 e.preventDefault();
@@ -34,6 +38,11 @@ const Register=()=>{
                 return 
                } 
                console.log("registeration is successful")
+               navigate("/") 
+        }
+
+        const userLogin=()=>{
+                        navigate("/")
         }
 
 
@@ -41,19 +50,25 @@ const Register=()=>{
             setSignup({...signup,[e.target.name]:e.target.value});
         }
 
+        const handleLogin=()=>{
+                setRegisterpage(!registerPage);
+        }
+
+
     return (
       
-                <div className='Container'>
-                    
+                <div className='Container'>                    
                     <div className='leftSide '>
                             <img src={ImgUrl} alt="" />
                             <div className="transparent-layer"></div>
                     </div>
                        <div className='rightSide '>
 
+                        {
+                                registerPage?
 
-                        <form className='signupForm' action=''  onSubmit={userSignup} >
-                          <h2>REGISTRATION FORM</h2>
+                        <form className='signupForm' action=''  onSubmit={userSignup} style={{padding:"20px"}} >
+                          <h2 style={{color:"green" , textAlign:"center"}} >REGISTRATION FORM</h2>
                             <div className='signupuserInput'>
                                     <input type="text" onChange={(e)=>onInputChange(e)}  placeholder='First Name' name="firstname" />   
                             </div>
@@ -79,10 +94,29 @@ const Register=()=>{
                             <div className='signupuserInput'>
                                     <input type="password"  placeholder='Confirm Password' />                                    
                             </div>
-
-
                             <button  className='signupBtn' type='submit'   >Register</button>
+                            <div className='LoginPage' >
+                          Already have an account?     <span className='login' onClick={handleLogin} > <u> Login </u> </span>
+                        </div>
 </form>
+      :                                 
+      <form className='signupForm' action=''  onSubmit={userLogin} style={{padding:"70px"}} >
+        <h2 style={{color:"green", textAlign:"center"}} >LOGIN FORM</h2>
+          <div className='signupuserInput'>
+                  <input type="text"  onChange={(e)=>onInputChange(e)} placeholder='Username' name="username" />        
+          </div>       
+          <div className='signupuserInput'>
+                  <input type="password" onChange={(e)=>onInputChange(e)}  placeholder='Password' name="password" />                                    
+          </div>
+        
+          <button  className='signupBtn' type='submit'   >Login</button>
+          <div className='LoginPage' >
+          New to Job Hunt?     <span className='login' onClick={handleLogin} > <u> Register </u> </span>
+      </div>
+</form>
+
+                        }
+
                         </div> 
 
                 </div>    

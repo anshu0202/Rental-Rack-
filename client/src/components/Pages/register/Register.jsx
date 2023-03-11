@@ -54,21 +54,6 @@ const Register=()=>{
                         <form className='signupForm'>
                                 
 
-
-
-
-
-
-             
-
-
-
-
-
-
-
-
-
                           <h2>REGISTRATION FORM</h2>
 
                             <div className='signupuserInput'>

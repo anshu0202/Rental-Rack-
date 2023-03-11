@@ -8,6 +8,7 @@ import Header from './components/Header';
 import About from './components/About';
 import Services from './components/Services';
 import Register from './components/Pages/register/Register';
+import Footer from './components/Footer';
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
       <Route path="/services" element={<Services/>}/>
       <Route path="/register" element={<Register/>}/>
     </Routes>
+    <Footer/>
   </BrowserRouter>
   </>
     

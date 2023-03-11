@@ -26,7 +26,8 @@ const Register=()=>{
         const ImgUrl="https://img.freepik.com/free-vector/telework-concept-illustration_114360-5389.jpg?w=2000"       
         const [signup,setSignup]=useState(signupInitialValues);
 
-        const userSignup= async()=>{
+        const userSignup= async(e)=>{
+                e.preventDefault();
                 console.log("values are ",signup)
                let res= await authenticateSignup(signup);
                if(!res){
@@ -51,29 +52,10 @@ const Register=()=>{
                        <div className='rightSide '>
 
 
-                        <form className='signupForm'>
-                                
-
-
-
-
-
-
-             
-
-
-
-
-
-
-
-
-
+                        <form className='signupForm' action=''  onSubmit={userSignup} >
                           <h2>REGISTRATION FORM</h2>
-
                             <div className='signupuserInput'>
-                                    <input type="text" onChange={(e)=>onInputChange(e)}  placeholder='First Name' name="firstname" />
-                                   
+                                    <input type="text" onChange={(e)=>onInputChange(e)}  placeholder='First Name' name="firstname" />   
                             </div>
 
                             <div className='signupuserInput'>           
@@ -99,7 +81,7 @@ const Register=()=>{
                             </div>
 
 
-                            <button  className='signupBtn' onClick={()=>userSignup()}  >Register</button>
+                            <button  className='signupBtn' type='submit'   >Register</button>
 </form>
                         </div> 
 

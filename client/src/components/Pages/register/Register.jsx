@@ -29,8 +29,7 @@ const Register = () => {
 
         const navigate = useNavigate();
 
-        //        const ImgUrl="https://img.freepik.com/free-vector/data-analysis-business-concept-doodle-analysts-office-people-work-together-research-statistics-charts-graphs-diagrams-sales-management-operational-reports-line-art-vector-illustration_107791-9818.jpg?w=2000"
-        //  const ImgUrl="https://cdn2.hubspot.net/hubfs/5242301/Blog%20Images/Happy%20Employee%20Dovetail%20Employee%20Portal.jpg" 
+        
         const ImgUrl = "https://img.freepik.com/free-vector/telework-concept-illustration_114360-5389.jpg?w=2000"
 
         // const [signup, setSignup] = useState(signupInitialValues);
@@ -53,15 +52,22 @@ const Register = () => {
         const [forget,setForget]=useState(true);
         const [forgetEmail,setforgetEmail]=useState('');
         const [OTP,setOTP]=useState(true);
+        const [newPass,setNewPass]=useState(false);
 
         const [getOtp, setGetOtp]=useState('');
 
+        const[getNewpass, setGetNewpass]=useState({
+                newpassword:"",
+                confirmpassword:""
+        });
+
+
+           //==========Registeration code =========================================
 
         const userSignup = async (e) => {
                 e.preventDefault();
                 
-                console.log("values are ", signup)
-                console.log(signup.firstname.length)
+               
         //         if(signup.firstname.length<=2){
         //                 toast("Please Enter valid first name",{
         //                         autoClose:2000
@@ -72,6 +78,8 @@ const Register = () => {
         //                 autoClose:2000
         //         })
         //        }
+
+     
                 if(signup.fullname.length<=3){
                 toast("Fullname should be more than 3 characters",{
                         autoClose:2000
@@ -90,7 +98,7 @@ const Register = () => {
                 })
                }
                else {
-                //   navigate("/")
+                  navigate("/")
               
                   signup.phone=phone;
                   console.log("signup is ", signup)
@@ -147,31 +155,57 @@ const Register = () => {
                 setGetOtp('');
                 
                 console.log("opt is ",getOtp)
-                window.Email.send({
-                        Host : "smtp.elasticemail.com",
-                        Username : "anshu.verma62074@gmail.com",
-                        Password : "B4B14856EDDCC0A25DAF23492E8D4A7E356B",
-                        To : forgetEmail,
-                        From : "anshu.verma62074@gmail.com",
-                        Subject : "This is the otp to reset password for JOB HUNT",
-                        Body : otp
-                }).then(
-                      message => alert(message)
-                );
+                // window.Email.send({
+                //         Host : "smtp.elasticemail.com",
+                //         Username : "anshu.verma62074@gmail.com",
+                //         Password : "B4B14856EDDCC0A25DAF23492E8D4A7E356B",
+                //         To : forgetEmail,
+                //         From : "anshu.verma62074@gmail.com",
+                //         Subject : "This is the otp to reset password for JOB HUNT",
+                //         Body : otp
+                // }).then(
+                // //       message => alert(message) 
+                //      message=>{
+
+                //         if(message==="OK"){
+                //                 toast("OTP has been sent successfully",{
+                //                         autoClose:2000
+                //                 })
+                //         }
+                //         else{
+                //                 toast(message,{
+                //                         autoClose:2000
+                //                 })
+
+                //         }
+                       
+                //      }
+                // );
         }
 
 
         const handleChangeOtp=(e)=>{
                 // e.preventDefault();
                 setGetOtp(e.target.value);
-                console.log("opt is ",getOtp)
+              
         }
 
         const handleOtpSubmit=(e)=>{
                         e.preventDefault();
                 console.log("submit is ", getOtp);
-                navigate("/")
+                // navigate("/")
+                setNewPass(true)
         }
+
+
+        const handleNewPass=(e)=>{
+                setGetNewpass({ ...getNewpass, [e.target.name]: e.target.value });
+        }
+
+       const  handleNewPassSubmit=()=>{
+          console.log(getNewpass)
+            navigate("/")
+       }
 
 
         return (
@@ -186,6 +220,9 @@ const Register = () => {
 
                                 {
                                         registerPage ?
+
+
+  //==================================================This is registeration Form ===================================================
 
                                                 <form className='signupForm' action='' onSubmit={userSignup} style={{ padding: "20px" }} >
                                                 
@@ -231,6 +268,7 @@ const Register = () => {
                                                 
 
                                                 forget?
+        //===================================Login form======================================
                                                 
                                                 <form className='signupForm' action='' onSubmit={userLogin} style={{ padding: "70px" }} >
                                                         <h2 style={{ color: "green", textAlign: "center" }} >LOGIN FORM</h2>
@@ -258,22 +296,14 @@ const Register = () => {
                                                 :
 
                                                 
-
+//=================================Forget Email===================================================
                                                        
                                                 <div  className='signupForm'   >  
                                                 <div className='OtpForm'>
                                                        
                                                 <img src={OtpImg} style={{ objectFit:"fill", width:"40vh", height:"50vh"}} alt="" />   
                                              
-                                                <>     
-
-
-                                                {/* <div className='signupuserInput' style={{alignItems:"center" }}> */}
-                                                                
-
-                                                                
-
-                                                                      
+                                                <>                   
                                                         <div className='signupuserInput' style={{alignItems:"center", marginTop:"100px" }}>  
                                                         { OTP ?
                                                                 <>
@@ -284,17 +314,36 @@ const Register = () => {
                                                         
                                                         :
                                                         <>
-                                                                <input type="text" style={{fontSize:"15px"}} onChange={handleChangeOtp} placeholder='Enter OTP' name="getOtp" value={getOtp
+                                                                {
+                                                                                newPass?
+
+                                                                 <>
+                                                                 <div className='signupuserInput'>
+                                                                <input type="password" onChange={(e) => handleNewPass(e)} placeholder='Enter New Password' name="newpassword" />
+                                                        </div>
+                                                        <div className='signupuserInput'>
+                                                                <input type="password" onChange={(e) => handleNewPass(e)} placeholder='Confirm Password' name="confirmpassword" />
+                                                        </div>
+                                                        <button  className='btn-primary btn' style={{marginTop:"10px", backgroundColor:"green" , width:"100px" , marginLeft:"50px" }} onClick={handleNewPassSubmit} >Submit</button>
+                                                                
+                                                                </> 
+                                                        :
+                                                           <>
+                                                           <input type="text" style={{fontSize:"15px"}} onChange={handleChangeOtp} placeholder='Enter OTP' name="getOtp" value={getOtp
                                                                 } />
                                                                 <br />
 
                                                                 <button  className='btn-primary btn' style={{marginTop:"10px", backgroundColor:"green" , width:"100px" , marginLeft:"50px" }} onClick={handleOtpSubmit} >Submit</button>
-
-
+                                                           
+                                                           
+                                                           
+                                                           </>
+}
+                                                        
                                                                 </>                                              
                                                         }                                                               
                                                         </div>  
-                                                        {/* </div> */}
+                                                
               
                   
                                                       </>

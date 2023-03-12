@@ -9,6 +9,7 @@ import About from './components/Pages/About';
 import Services from './components/Pages/Services';
 
 import Register from './components/Pages/register/Register';
+import Footer from './components/Footer';
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
       <Route path="/services" element={<Services/>}/>
       <Route path="/register" element={<Register/>}/>
     </Routes>
+    
   </BrowserRouter>
   </>
     

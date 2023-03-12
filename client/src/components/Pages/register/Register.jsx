@@ -67,16 +67,13 @@ const Register=()=>{
                         {
                                 registerPage?
 
-<<<<<<< HEAD
-                        <form className='signupForm'>
-                                
+                      
 
-                          <h2>REGISTRATION FORM</h2>
 
-=======
+
                         <form className='signupForm' action=''  onSubmit={userSignup} style={{padding:"20px"}} >
+                        <h2>REGISTRATION FORM</h2>
                           <h2 style={{color:"green" , textAlign:"center"}} >REGISTRATION FORM</h2>
->>>>>>> 8577020350955ed99ede84ff4ac8d78525d539ff
                             <div className='signupuserInput'>
                                     <input type="text" onChange={(e)=>onInputChange(e)}  placeholder='First Name' name="firstname" />   
                             </div>
@@ -106,26 +103,26 @@ const Register=()=>{
                             <div className='LoginPage' >
                           Already have an account?     <span className='login' onClick={handleLogin} > <u> Login </u> </span>
                         </div>
-</form>
-      :                                 
-      <form className='signupForm' action=''  onSubmit={userLogin} style={{padding:"70px"}} >
-        <h2 style={{color:"green", textAlign:"center"}} >LOGIN FORM</h2>
-          <div className='signupuserInput'>
-                  <input type="text"  onChange={(e)=>onInputChange(e)} placeholder='Username' name="username" />        
-          </div>       
-          <div className='signupuserInput'>
-                  <input type="password" onChange={(e)=>onInputChange(e)}  placeholder='Password' name="password" />                                    
-          </div>
-        
-          <button  className='signupBtn' type='submit'   >Login</button>
-          <div className='LoginPage' >
-          New to Job Hunt?     <span className='login' onClick={handleLogin} > <u> Register </u> </span>
-      </div>
-</form>
+                        </form>
+                        :                                 
+                        <form className='signupForm' action=''  onSubmit={userLogin} style={{padding:"70px"}} >
+                                <h2 style={{color:"green", textAlign:"center"}} >LOGIN FORM</h2>
+                                <div className='signupuserInput'>
+                                        <input type="text"  onChange={(e)=>onInputChange(e)} placeholder='Username' name="username" />        
+                                </div>       
+                                <div className='signupuserInput'>
+                                        <input type="password" onChange={(e)=>onInputChange(e)}  placeholder='Password' name="password" />                                    
+                                </div>
+                                
+                                <button  className='signupBtn' type='submit'   >Login</button>
+                                <div className='LoginPage' >
+                                New to Job Hunt?     <span className='login' onClick={handleLogin} > <u> Register </u> </span>
+                        </div>
+                        </form>
 
-                        }
+        }
 
-                        </div> 
+        </div> 
 
                 </div>    
     )

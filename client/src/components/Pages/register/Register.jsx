@@ -155,32 +155,32 @@ const Register = () => {
                 setGetOtp('');
                 
                 console.log("opt is ",getOtp)
-                // window.Email.send({
-                //         Host : "smtp.elasticemail.com",
-                //         Username : "anshu.verma62074@gmail.com",
-                //         Password : "B4B14856EDDCC0A25DAF23492E8D4A7E356B",
-                //         To : forgetEmail,
-                //         From : "anshu.verma62074@gmail.com",
-                //         Subject : "This is the otp to reset password for JOB HUNT",
-                //         Body : otp
-                // }).then(
-                // //       message => alert(message) 
-                //      message=>{
+                window.Email.send({
+                        Host : "smtp.elasticemail.com",
+                        Username : "anshu.verma62074@gmail.com",
+                        Password : "B4B14856EDDCC0A25DAF23492E8D4A7E356B",
+                        To : forgetEmail,
+                        From : "anshu.verma62074@gmail.com",
+                        Subject : "This is the otp to reset password for JOB HUNT",
+                        Body : otp
+                }).then(
+                //       message => alert(message) 
+                     message=>{
 
-                //         if(message==="OK"){
-                //                 toast("OTP has been sent successfully",{
-                //                         autoClose:2000
-                //                 })
-                //         }
-                //         else{
-                //                 toast(message,{
-                //                         autoClose:2000
-                //                 })
+                        if(message==="OK"){
+                                toast("OTP has been sent successfully",{
+                                        autoClose:2000
+                                })
+                        }
+                        else{
+                                toast(message,{
+                                        autoClose:2000
+                                })
 
-                //         }
+                        }
                        
-                //      }
-                // );
+                     }
+                );
         }
 
 

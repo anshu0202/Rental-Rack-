@@ -7,7 +7,7 @@ import { FaDiscord, FaInstagram, FaYoutube } from "react-icons/fa";
 const Footer = () => {
   return (
     <>
-      <Wrapper>
+      <Wrapper style={{borderTop:"1px solid white"}}>
        
        
         <footer class="footer-distributed">

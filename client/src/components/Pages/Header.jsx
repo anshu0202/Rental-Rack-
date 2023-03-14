@@ -18,7 +18,7 @@ function Header() {
 
   return (
     <>
-      <Navbar className="bg-dark position-fixed w-100 " variant="light" expand="lg" style={{color:"white",opacity:"0.9"}}>
+      <Navbar className="sticky-top bg-dark position-fixed w-100 " variant="light" expand="lg" style={{color:"white",opacity:"0.9"}}>
       <Container>
         <Navbar.Brand href="#home" className='text-light  fs-3 fw-bold'>React-Bootstrap</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

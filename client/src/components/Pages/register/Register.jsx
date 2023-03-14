@@ -328,9 +328,9 @@ const Register = () => {
                                                         </div>
 
                                                         <div className='signupuserInput'>
-{/* 
+
                                                         <PhoneInput placeholder="Enter phone number"  value={phone} onChange={setPhone}
-                            defaultCountry="" /> */}
+                            defaultCountry="" /> 
 
 
                                                                 {/* <input type="text" onChange={(e) => onInputChange(e)} placeholder='Phone Number' name="phone" /> */}

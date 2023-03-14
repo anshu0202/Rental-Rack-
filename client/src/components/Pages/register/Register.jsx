@@ -2,7 +2,7 @@
 import { Dialog } from '@mui/material'
 import { useState , useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authenticateSignup } from '../../../service/api'
+import { authenticateSignup,authenticateLogin, verifyEmail, updatePassword } from '../../../service/api'
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './register.css'
@@ -11,6 +11,7 @@ import PhoneInput from 'react-phone-number-input'
 import generateOtp from 'rv-otp-generator';
 import OtpImg from '../../../Images/otp.png'
 import { height } from '@mui/system';
+
 
 const signupInitialValues = {
         firstname: '',
@@ -25,10 +26,7 @@ const signupInitialValues = {
 const Register = () => {
 
         const temp = []
-
         const navigate = useNavigate();
-
-        
         const ImgUrl = "https://img.freepik.com/free-vector/telework-concept-illustration_114360-5389.jpg?w=2000"
 
         // const [signup, setSignup] = useState(signupInitialValues);
@@ -42,9 +40,10 @@ const Register = () => {
                 confirmPass:''
         });
 
-
-        
-
+        const [login,setLogin]=useState({
+                fullname:"",
+                password:""
+        })
 
         const [registerPage, setRegisterpage] = useState(true);
         const [phone, setPhone] = useState("+911234567890");
@@ -54,15 +53,20 @@ const Register = () => {
         const [newPass,setNewPass]=useState(false);
 
         const [getOtp, setGetOtp]=useState('');
-
+        const [otp,setotp]=useState(0);
         const[getNewpass, setGetNewpass]=useState({
                 newpassword:"",
                 confirmpassword:""
         });
 
+        // const email="";
+
 
            //==========Registeration code =========================================
 
+        const onInputChange = (e) => {
+                setSignup({ ...signup, [e.target.name]: e.target.value });
+        }
         const userSignup = async (e) => {
                 e.preventDefault();
                 
@@ -97,89 +101,128 @@ const Register = () => {
                 })
                }
                else {
-                  navigate("/")
-              
-                  signup.phone=phone;
-                  console.log("signup is ", signup)
+
+                signup.phone=phone;
+                delete signup.confirmPass; 
+                console.log(signup)
+                let res= await authenticateSignup(signup);
+
+                console.log("res is ", res)
+
+                if(res){
+                        console.log("registeration is successful")
+                        navigate("/")
+                }
+
+                else{
+                        toast("Email-id or Phone is already registered",{
+                                autoClose:2000
+                        })
+
+                        console.log("registeration is unsucessfull")
+                        return
+
+                }  
                }
-
-
-
-                // let res = await authenticateSignup(signup);
-
-                console.log("registeration is successful")
-                // navigate("/")
-
-                // console.log("res is ",res)
-                // if (!res) {
-                //         return
-                // }
-                // console.log("registeration is successful")
-                // navigate("/")
         }
-
-        const userLogin = () => {
-                navigate("/")
-        }
-
-
-        const onInputChange = (e) => {
-                setSignup({ ...signup, [e.target.name]: e.target.value });
-        }
-
         const handleLogin = () => {
                 setRegisterpage(!registerPage);
         }
 
+
+        //=============================================Login Code=============================================
+
+       const onInputChangeLogin=(e)=>{
+             setLogin({...login,[e.target.name]:e.target.value})
+       }
+        const userLogin = async(e) => {
+                e.preventDefault();
+                    if(login.fullname.length<=3){
+                        toast("Fullname should be more than 3 characters",{
+                                autoClose:2000
+                        })
+                       }
+                       else{
+                        console.log("login is ", login)
+                        let res= await authenticateLogin(login);
+                        if(res){
+                                console.log("Login is successfull")
+                                navigate("/")
+                        }
+                        else{
+                                toast("Password is incorrect",{
+                                        autoClose:2000
+                                })
+                                console.log("Login is unsucessfull")
+                                return
+                        } 
+                       }      
+        }
+
+
+
+        //================================Forget password code===========================================
+
         const handleForget=()=>{
                 setForget(false);
         }
-
         const handleForgetEmail=(e)=>{
                 setforgetEmail(e.target.value)
                 console.log("mail is ",forgetEmail)
         }
         
-        const handleOtp=(e)=>{
+        const handleOtp=async(e)=>{
                 e.preventDefault();
+                        // email=forgetEmail
+                let res=await verifyEmail({email:forgetEmail});
 
-                setOTP(false)
-                console.log("opthhh is ",getOtp)
-                console.log("email is ",forgetEmail)
-                const otp = generateOtp(4)
-                console.log(otp)
-                temp.push({"email" : forgetEmail , "otp" : otp})
-                console.log(temp)
-                setforgetEmail('');
-                setGetOtp('');
-                
-                console.log("opt is ",getOtp)
-                window.Email.send({
-                        Host : "smtp.elasticemail.com",
-                        Username : "anshu.verma62074@gmail.com",
-                        Password : "B4B14856EDDCC0A25DAF23492E8D4A7E356B",
-                        To : forgetEmail,
-                        From : "anshu.verma62074@gmail.com",
-                        Subject : "This is the otp to reset password for JOB HUNT",
-                        Body : otp
-                }).then(
-                //       message => alert(message) 
-                     message=>{
-
-                        if(message==="OK"){
-                                toast("OTP has been sent successfully",{
+                        console.log("res is ",res)
+                   if(res){
+                        setOTP(false)
+                        console.log("opthhh is ",getOtp)
+                        console.log("email is ",forgetEmail)
+                        const otp = generateOtp(4)
+                        setotp(otp);
+                        console.log(otp)
+                        temp.push({"email" : forgetEmail , "otp" : otp})
+                        console.log(temp)
+                        // setforgetEmail('');
+                        setGetOtp('');
+                        
+                        console.log("opt is ",getOtp)
+                        window.Email.send({
+                                Host : "smtp.elasticemail.com",
+                                Username : "anshu.verma62074@gmail.com",
+                                Password : "B4B14856EDDCC0A25DAF23492E8D4A7E356B",
+                                To : forgetEmail,
+                                From : "anshu.verma62074@gmail.com",
+                                Subject : "This is the otp to reset password for JOB HUNT",
+                                Body : otp
+                        }).then(
+                        //       message => alert(message) 
+                             message=>{
+                                        // alert(message)
+                                if(message==="OK"){
+                                        toast("OTP has been sent successfully",{
+                                                autoClose:2000
+                                        })
+                                }
+                                else{
+                                        alert("Something went wrong try after some time")
+                                        toast(message,{
+                                                autoClose:2000
+                                        })
+        
+                                }
+                               
+                             }
+                        );
+                   }     
+                        else {
+                                toast("Email is not registered",{
                                         autoClose:2000
-                                })
+                                })  
                         }
-                        else{
-                                toast(message,{
-                                        autoClose:2000
-                                })
-
-                        }
-                       
-                     }
-                );
         }
 
 
@@ -191,19 +234,61 @@ const Register = () => {
 
         const handleOtpSubmit=(e)=>{
                         e.preventDefault();
-                console.log("submit is ", getOtp);
-                // navigate("/")
-                setNewPass(true)
+                        console.log("temp is ", temp)
+                        if(otp!=getOtp){
+                                toast("OTP is incorrect",{
+                                        autoClose:2000
+                                })  
+                        }
+                        else{
+                                //    let flag=0;     
+                                //   for(var i=0;i<temp.length;i++){
+                                //         if(temp[i].email==forgetEmail && temp[i].otp==getOtp){
+                                //                     flag=1;    
+                                //         }
+                                //   }      
+                                //   if(flag){
+                                //         setNewPass(true)
+                                //   }
+                                console.log("forget email is ", forgetEmail)
+
+                               setNewPass(true);
+                        }
         }
 
+        //============================New password set code==========================================
 
         const handleNewPass=(e)=>{
                 setGetNewpass({ ...getNewpass, [e.target.name]: e.target.value });
         }
+       const  handleNewPassSubmit=async(e)=>{
+        console.log("mouse has been clieked");
+                        e.preventDefault();
+                        console.log(getNewpass)
+        if(getNewpass.newpassword!=getNewpass.confirmpassword){
+              toast("Passwords do not match",{
+                      autoClose:2000
+              })
+             }
+        else{
 
-       const  handleNewPassSubmit=()=>{
-          console.log(getNewpass)
-            navigate("/")
+                console.log("registered email is ", forgetEmail);
+                        const res=await updatePassword({email:forgetEmail,password:getNewpass.newpassword}) 
+                        
+                        if(res){
+                                        toast("Password has been updated successfully",{
+                                                autoClose:2000
+                                        })
+                        }
+                        else{
+                                toast("Something went wrong try after sometime",{
+                                        autoClose:2000
+                                })
+                        }
+               
+               
+        }
+          
        }
 
 
@@ -234,11 +319,11 @@ const Register = () => {
                                                                 <input type="text" onChange={(e) => onInputChange(e)} placeholder='Last Name' name="lastname" />
                                                         </div> */}
                                                         <div className='signupuserInput'>
-                                                                <input type="text" onChange={(e) => onInputChange(e)} placeholder='Full name' name="fullname" />
+                                                                <input type="text" onChange={(e) => onInputChange(e)} value={signup.fullname} placeholder='Full name' name="fullname" />
 
                                                         </div>
                                                         <div className='signupuserInput'>
-                                                                <input type="email" onChange={(e) => onInputChange(e)} placeholder='Email Address' name="email" />
+                                                                <input type="email" onChange={(e) => onInputChange(e)} value={signup.email} placeholder='Email Address' name="email" />
 
                                                         </div>
 
@@ -251,7 +336,7 @@ const Register = () => {
                                                                 {/* <input type="text" onChange={(e) => onInputChange(e)} placeholder='Phone Number' name="phone" /> */}
                                                         </div>
                                                         <div className='signupuserInput'>
-                                                                <input type="password" onChange={(e) => onInputChange(e)} placeholder='Password' name="password" />
+                                                                <input type="password" onChange={(e) => onInputChange(e)} value={signup.password} placeholder='Password' name="password" />
                                                         </div>
                                                         <div className='signupuserInput'>
                                                                 <input type="password" onChange={(e) => onInputChange(e)}   name='confirmPass' placeholder='Confirm Password' />
@@ -272,13 +357,13 @@ const Register = () => {
                                                 <form className='signupForm' action='' onSubmit={userLogin} style={{ padding: "70px" }} >
                                                         <h2 style={{ color: "green", textAlign: "center" }} >LOGIN FORM</h2>
                                                         <div className='signupuserInput'>
-                                                                <input type="text" onChange={(e) => onInputChange(e)} placeholder='Full name' name="fullname" />
+                                                                <input type="text" onChange={(e) => onInputChangeLogin(e)} placeholder='Full name' value={login.fullname} name="fullname" />
                                                         </div>
                                                         <div className='signupuserInput'>
-                                                                <input type="password" onChange={(e) => onInputChange(e)} placeholder='Password' name="password" />
+                                                                <input type="password" onChange={(e) => onInputChangeLogin(e)} value={login.password}  placeholder='Password' name="password" />
                                                         </div>
 
-                                                        <button className='signupBtn' type='submit'>Login</button>
+                                                        <button className='signupBtn' type='submit'  >Login</button>
                                                                 <div className='forgetPassword' onClick={handleForget} >
                                                                         Forget Password?
                                                                 </div>
@@ -306,7 +391,7 @@ const Register = () => {
                                                         <div className='signupuserInput' style={{alignItems:"center", marginTop:"100px" }}>  
                                                         { OTP ?
                                                                 <>
-                                                        <input type="email" onChange={handleForgetEmail} placeholder='Enter Register Email' name="forgetEmail" style={{fontSize:"15px", witdh:"auto"}} />
+                                                        <input type="email" onChange={handleForgetEmail} placeholder='Enter Register Email' value={forgetEmail} name="forgetEmail" style={{fontSize:"15px", witdh:"auto"}} />
 
                                                         <button  className='btn-primary btn' style={{marginTop:"10px", backgroundColor:"green" , width:"100px" , marginLeft:"80px" }} onClick={handleOtp} >Send OTP</button>
                                                         </>
@@ -316,9 +401,11 @@ const Register = () => {
                                                                 {
                                                                                 newPass?
 
+        // ===========================================  new password===========================================
+
                                                                  <>
                                                                  <div className='signupuserInput'>
-                                                                <input type="password" onChange={(e) => handleNewPass(e)} placeholder='Enter New Password' name="newpassword" />
+                                                                <input type="password" onChange={(e) => handleNewPass(e)} placeholder='Enter New Password' name="newpassword"  />
                                                         </div>
                                                         <div className='signupuserInput'>
                                                                 <input type="password" onChange={(e) => handleNewPass(e)} placeholder='Confirm Password' name="confirmpassword" />
@@ -328,6 +415,7 @@ const Register = () => {
                                                                 </> 
                                                         :
                                                            <>
+      {/* ===========================================Opt validate section ==========================================   */}
                                                            <input type="text" style={{fontSize:"15px"}} onChange={handleChangeOtp} placeholder='Enter OTP' name="getOtp" value={getOtp
                                                                 } />
                                                                 <br />
@@ -342,9 +430,6 @@ const Register = () => {
                                                                 </>                                              
                                                         }                                                               
                                                         </div>  
-                                                
-              
-                  
                                                       </>
                                                       </div> 
                                                         </div>    

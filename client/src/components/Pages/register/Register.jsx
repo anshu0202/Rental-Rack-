@@ -12,7 +12,6 @@ import generateOtp from 'rv-otp-generator';
 import OtpImg from '../../../Images/otp.png'
 import { height } from '@mui/system';
 
-
 const signupInitialValues = {
         firstname: '',
         lastname: '',
@@ -244,9 +243,9 @@ const Register = () => {
                                                         </div>
 
                                                         <div className='signupuserInput'>
-
+{/* 
                                                         <PhoneInput placeholder="Enter phone number"  value={phone} onChange={setPhone}
-                            defaultCountry="" />
+                            defaultCountry="" /> */}
 
 
                                                                 {/* <input type="text" onChange={(e) => onInputChange(e)} placeholder='Phone Number' name="phone" /> */}

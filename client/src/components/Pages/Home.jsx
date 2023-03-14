@@ -8,6 +8,7 @@ import img5 from "../../Images/img5.jpg"
 import "react-multi-carousel/lib/styles.css";
 import Header from "./Header";
 import Carousel from "react-bootstrap/Carousel";
+import Footer from "../Footer";
 
 const slides = [
     { src: {img1} },
@@ -52,6 +53,7 @@ function Home() {
           fugit alias hic delectus amet beatae dignissimos praesentium
           necessitatibus!
         </h1>
+        <Footer/>
       </div>
     </>
   );

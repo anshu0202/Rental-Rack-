@@ -52,7 +52,7 @@ const Footer = () => {
 
 			</div>
 
-			<div class="footer-right">
+			<div className="footer-right">
 
 				<p class="footer-company-about">
 					<span>About the company</span>
@@ -61,10 +61,10 @@ const Footer = () => {
 
 				<div class="footer-icons">
 
-					<a href="#"><i class="fa fa-facebook"></i></a>
-					<a href="#"><i class="fa fa-twitter"></i></a>
-					<a href="#"><i class="fa fa-linkedin"></i></a>
-					<a href="#"><i class="fa fa-github"></i></a>
+					<a href="#"><i className="fa fa-facebook"></i></a>
+					<a href="#"><i className="fa fa-twitter"></i></a>
+					<a href="#"><i className="fa fa-linkedin"></i></a>
+					<a href="#"><i className="fa fa-github"></i></a>
 
 				</div>
 
